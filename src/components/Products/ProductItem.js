@@ -7,7 +7,10 @@ import { toggleFav } from '../../store/actions/products';
 import {ProductsContext} from '../../context/products-context';
 
 const ProductItem = props => {
-  const[state, dispatch] = useStore();
+  console.log('rendered');
+  //cada elemento tiene su propio custom hook
+  
+  const[state, dispatch] = useStore(false);
 
   const toggleFavHandler = () => {
       dispatch('TOGGLE_FAV', props.id);//DISPTACH ACTION
@@ -29,4 +32,4 @@ const ProductItem = props => {
   );
 };
 
-export default ProductItem;
+export default React.memo(ProductItem);

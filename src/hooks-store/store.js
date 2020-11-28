@@ -4,7 +4,8 @@ let listeners = []; //function i can call that can update component hook that ar
 let actions = {};//
 //share logic and data from all files that import from it
 
-export const useStore = () =>{
+export const useStore = (shouldListen = true) =>{
+    
     //seState changes state to it will re-render
     const [_, setState] = useState(globalState);//guarante that this does not change
     
@@ -20,11 +21,17 @@ export const useStore = () =>{
     };
     
     useEffect(()=>{
-        listeners.push(setState);
+        if(shouldListen){
+              listeners.push(setState);
+        }
+      
         return () => {
-            listeners = listeners.filter(li => li !== setState);//clear setState
+            if(shouldListen){
+                 listeners = listeners.filter(li => li !== setState);//clear setState
+            }
+           
         };
-    }, []);
+    }, [shouldListen]);
 
 
     return [globalState, dispatch];//emulation of user Reducer
@@ -33,7 +40,7 @@ export const useStore = () =>{
 
 export const initStore = (userActions, initialState) =>{//same as UserReducer
     //actions that update our actions share object, and globalState shared Object
-    if(initialState){
+    if(initialState){//create multiple slices  when instanciada en varias partes
         globalState = {...globalState, ...initialState};
     }
     actions = {...actions, ...userActions};

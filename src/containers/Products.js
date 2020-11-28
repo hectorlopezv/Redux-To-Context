@@ -9,6 +9,11 @@ import {useStore} from '../hooks-store/store';
 
 const Products = props => {
   //passing state and dispatch
+  //como usamos setstate dentro del custom hook
+  //este se renderizara pq el state se initializa y esto manda
+  //un re-render debido a que state, dispatch en products.js cambia....
+  //solucion es si no queremos a escuchar a cambios en el store
+  //podemos pasar un argumento que indique esto
   const [state, dispatch] = useStore();//el user Reducer
   
   return (
