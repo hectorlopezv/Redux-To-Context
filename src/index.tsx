@@ -7,15 +7,17 @@ import { combineReducers, createStore } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import AnonymousFunction from './context/products-context';
+import configureStore from './hooks-store/products-store';
 
+configureStore();//initilizar our custom hooks sotre
 
 ReactDOM.render(
   <React.StrictMode> 
-    <AnonymousFunction>
+
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </AnonymousFunction>
+
 
   </React.StrictMode>,
   document.getElementById('root')

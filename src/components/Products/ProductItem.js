@@ -1,17 +1,16 @@
 import React, {useContext} from 'react';
 import { useDispatch } from 'react-redux';
-
+import {useStore} from '../../hooks-store/store';
 import Card from '../UI/Card';
 import './ProductItem.css';
 import { toggleFav } from '../../store/actions/products';
 import {ProductsContext} from '../../context/products-context';
 
 const ProductItem = props => {
-  const toogleFav = useContext(ProductsContext).toogleFav;
-
+  const[state, dispatch] = useStore();
 
   const toggleFavHandler = () => {
-      toogleFav(props.id);
+      dispatch('TOGGLE_FAV', props.id);//DISPTACH ACTION
   };
 
   return (

@@ -4,13 +4,16 @@ import { useSelector } from 'react-redux';
 import ProductItem from '../components/Products/ProductItem';
 import './Products.css';
 import {ProductsContext} from '../context/products-context';
+import {useStore} from '../hooks-store/store';
+
 
 const Products = props => {
-  const productList = useContext(ProductsContext).products;
+  //passing state and dispatch
+  const [state, dispatch] = useStore();//el user Reducer
   
   return (
     <ul className="products-list">
-      {productList.map(prod => (
+      {state.products.map(prod => (
         <ProductItem
           key={prod.id}
           id={prod.id}
