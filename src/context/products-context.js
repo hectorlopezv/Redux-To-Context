@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 
 
 export const ProductsContext = React.createContext({
-    products: []
+    products: [],
+    toogleFav: ()=>{}
 
 });
 ProductsContext.displayName = 'products-context-api-store';
@@ -37,12 +38,30 @@ const AnonymousFunction = (props) => {
           isFavorite: false
         }
       ]);
+
+    const toogleFavorite = productId =>{
+        setProductsList(currentState => {
+            console.log(currentState);
+            const prodIndex = currentState.findIndex(
+                p => p.id === productId
+            );
+            const newFavStatus = !currentState[prodIndex].isFavorite;
+            const updatedProducts = [...currentState];
+            updatedProducts[prodIndex] = {
+                ...currentState[prodIndex],
+                isFavorite: newFavStatus
+            };
+            return updatedProducts;
+        });
+    };
+
+
 //every child will get a new value when state updates
     return (
-        <ProductsContext.Provider value={{products: ProductsList }}>
+        <ProductsContext.Provider value={{products: ProductsList, toogleFav: toogleFavorite }}>
             {props.children}
         </ProductsContext.Provider>);
-};
+    };
 
 
 export default AnonymousFunction;
