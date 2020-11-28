@@ -6,19 +6,17 @@ import { Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import AnonymousFunction from './context/products-context';
 
-const rootReducer = combineReducers({
-  shop: productReducer
-});
 
-const store = createStore(rootReducer);
 ReactDOM.render(
-  <React.StrictMode>
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
+  <React.StrictMode> 
+    <AnonymousFunction>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </AnonymousFunction>
+
   </React.StrictMode>,
   document.getElementById('root')
 );
