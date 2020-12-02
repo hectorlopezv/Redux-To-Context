@@ -22,7 +22,7 @@ export const useStore = (shouldListen = true) =>{
     
     useEffect(()=>{
         if(shouldListen){
-              listeners.push(setState);
+              listeners.push(setState);//tell compnents subcribed to update
         }
       
         return () => {
